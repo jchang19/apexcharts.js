@@ -309,7 +309,8 @@ class Line {
           i
         })
       } else {
-        lineFill = w.globals.stroke.colors[realIndex]
+        // lineFill = w.globals.stroke.colors[realIndex]
+        lineFill = 'black'
       }
 
       for (let p = 0; p < paths.linePaths.length; p++) {
