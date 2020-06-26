@@ -304,13 +304,17 @@ class Line {
       let lineFill = null
       if (type === 'line') {
         // fillable lines only for lineChart
-        lineFill = fill.fillPath({
-          seriesNumber: realIndex,
-          i
-        })
+        // If user inputs a color in the data, override default colors
+        if (series[i][2] === null) {
+          lineFill = fill.fillPath({
+            seriesNumber: realIndex,
+            i
+          })
+        } else {
+          lineFill = series[i][2]
+        }
       } else {
-        // lineFill = w.globals.stroke.colors[realIndex]
-        lineFill = 'black'
+        lineFill = w.globals.stroke.colors[realIndex]
       }
 
       for (let p = 0; p < paths.linePaths.length; p++) {
@@ -318,8 +322,8 @@ class Line {
           ...defaultRenderedPathOptions,
           pathFrom: paths.pathFromLine,
           pathTo: paths.linePaths[p],
-          // stroke: lineFill,
-          stroke: 'black',
+          stroke: lineFill,
+          // stroke: 'black',
           strokeWidth: this.strokeWidth,
           strokeLineCap: w.config.stroke.lineCap,
           fill: 'none'
