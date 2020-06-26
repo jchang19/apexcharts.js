@@ -305,7 +305,10 @@ class Line {
       if (type === 'line') {
         // fillable lines only for lineChart
         // If user inputs a color in the data, override default colors
-        lineFill = 'white'
+        lineFill = fill.fillPath({
+          seriesNumber: realIndex,
+          i
+        })
         // if (series[realIndex][2] === null) {
         //   lineFill = fill.fillPath({
         //     seriesNumber: realIndex,
