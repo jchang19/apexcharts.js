@@ -21209,21 +21209,28 @@
 
           if (type === 'line') {
             // fillable lines only for lineChart
+            // If user inputs a color in the data, override default colors
             lineFill = fill.fillPath({
               seriesNumber: realIndex,
               i: i
-            });
+            }); // if (series[realIndex][2] === null) {
+            //   lineFill = fill.fillPath({ 
+            //     seriesNumber: realIndex,
+            //     i
+            //   })
+            // } else {
+            //   lineFill = series[realIndex][2]
+            // }
           } else {
-            // lineFill = w.globals.stroke.colors[realIndex]
-            lineFill = 'black';
+            lineFill = w.globals.stroke.colors[realIndex];
           }
 
           for (var _p = 0; _p < paths.linePaths.length; _p++) {
             var _renderedPath = graphics.renderPaths(_objectSpread2(_objectSpread2({}, defaultRenderedPathOptions), {}, {
               pathFrom: paths.pathFromLine,
               pathTo: paths.linePaths[_p],
-              // stroke: lineFill,
-              stroke: 'black',
+              stroke: lineFill,
+              // stroke: 'black',
               strokeWidth: this.strokeWidth,
               strokeLineCap: w.config.stroke.lineCap,
               fill: 'none'
