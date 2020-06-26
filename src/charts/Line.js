@@ -326,8 +326,8 @@ class Line {
           ...defaultRenderedPathOptions,
           pathFrom: paths.pathFromLine,
           pathTo: paths.linePaths[p],
-          stroke: lineFill,
-          // stroke: 'black',
+          // stroke: lineFill,d
+          stroke: 'black',
           strokeWidth: this.strokeWidth,
           strokeLineCap: w.config.stroke.lineCap,
           fill: 'none'
