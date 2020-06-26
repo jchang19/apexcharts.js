@@ -305,13 +305,13 @@ class Line {
       if (type === 'line') {
         // fillable lines only for lineChart
         // If user inputs a color in the data, override default colors
-        if (series[i][2] === null) {
+        if (series[realIndex][2] === null) {
           lineFill = fill.fillPath({
             seriesNumber: realIndex,
             i
           })
         } else {
-          lineFill = series[i][2]
+          lineFill = series[realIndex][2]
         }
       } else {
         lineFill = w.globals.stroke.colors[realIndex]
