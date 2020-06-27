@@ -21230,8 +21230,8 @@
             var _renderedPath = graphics.renderPaths(_objectSpread2(_objectSpread2({}, defaultRenderedPathOptions), {}, {
               pathFrom: paths.pathFromLine,
               pathTo: paths.linePaths[_p],
-              // stroke: lineFill,d
-              stroke: 'black',
+              stroke: lineFill,
+              // stroke: 'black',
               strokeWidth: this.strokeWidth,
               strokeLineCap: w.config.stroke.lineCap,
               fill: 'none'
