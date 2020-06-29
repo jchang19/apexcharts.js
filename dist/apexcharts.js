@@ -21213,7 +21213,7 @@
             // lineFill = fill.fillPath({
             //   seriesNumber: realIndex,
             //   i
-            // })
+            // }) 
             if (series[realIndex][2] === null) {
               lineFill = fill.fillPath({
                 seriesNumber: realIndex,
