@@ -4441,14 +4441,13 @@
 
         if (opts.solid) {
           pathFill = defaultColor;
-        } // override fill if opts.color
+        } // // override fill if opts.color
+        // if (opts.color) {
+        //   pathFill = opts.color
+        // }
 
 
-        if (opts.color) {
-          pathFill = opts.color;
-        }
-
-        return '#ffffff';
+        return pathFill;
       }
     }, {
       key: "getFillType",

@@ -187,12 +187,12 @@ class Fill {
       pathFill = defaultColor
     }
 
-    // override fill if opts.color
-    if (opts.color) {
-      pathFill = opts.color
-    }
+    // // override fill if opts.color
+    // if (opts.color) {
+    //   pathFill = opts.color
+    // }
 
-    return '#ffffff'
+    return pathFill
   }
 
   getFillType(seriesIndex) {
