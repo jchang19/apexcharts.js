@@ -4441,6 +4441,11 @@
 
         if (opts.solid) {
           pathFill = defaultColor;
+        } // override fill if opts.color
+
+
+        if (opts.color) {
+          pathFill = opts.color;
         }
 
         return pathFill;
