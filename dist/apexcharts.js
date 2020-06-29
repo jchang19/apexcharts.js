@@ -21210,17 +21210,18 @@
           if (type === 'line') {
             // fillable lines only for lineChart
             // If user inputs a color in the data, override default colors
-            lineFill = fill.fillPath({
-              seriesNumber: realIndex,
-              i: i
-            }); // if (series[realIndex][2] === null) {
-            //   lineFill = fill.fillPath({
-            //     seriesNumber: realIndex,
-            //     i
-            //   })
-            // } else {
-            //   lineFill = series[realIndex][2]
-            // }
+            // lineFill = fill.fillPath({
+            //   seriesNumber: realIndex,
+            //   i
+            // })
+            if (series[i][0] === null) {
+              lineFill = fill.fillPath({
+                seriesNumber: realIndex,
+                i: i
+              });
+            } else {
+              lineFill = series[i][0];
+            }
           } else {
             lineFill = w.globals.stroke.colors[realIndex];
           }
