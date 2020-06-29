@@ -21217,18 +21217,18 @@
           if (type === 'line') {
             // fillable lines only for lineChart
             // If user inputs a color in the data, override default colors
-            lineFill = fill.fillPath({
-              seriesNumber: realIndex,
-              i: i,
-              color: series[i].color
-            }); // if (series.color === null) {
-            //   lineFill = fill.fillPath({
-            //     seriesNumber: realIndex,
-            //     i
-            //   })
-            // } else {
-            //   lineFill = series.color
-            // }
+            // lineFill = fill.fillPath({
+            //   seriesNumber: realIndex,
+            //   i,
+            // })
+            if (series[i].color === null) {
+              lineFill = fill.fillPath({
+                seriesNumber: realIndex,
+                i: i
+              });
+            } else {
+              lineFill = series[i].color;
+            }
           } else {
             lineFill = w.globals.stroke.colors[realIndex];
           }
@@ -21237,8 +21237,8 @@
             var _renderedPath = graphics.renderPaths(_objectSpread2(_objectSpread2({}, defaultRenderedPathOptions), {}, {
               pathFrom: paths.pathFromLine,
               pathTo: paths.linePaths[_p],
-              // stroke: lineFill,
-              stroke: 'black',
+              stroke: lineFill,
+              // stroke: 'black',
               strokeWidth: this.strokeWidth,
               strokeLineCap: w.config.stroke.lineCap,
               fill: 'none'
