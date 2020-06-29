@@ -192,7 +192,7 @@ class Fill {
       pathFill = opts.color
     }
 
-    return 'black'
+    return '#ffffff'
   }
 
   getFillType(seriesIndex) {

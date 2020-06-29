@@ -4448,7 +4448,7 @@
           pathFill = opts.color;
         }
 
-        return 'black';
+        return '#ffffff';
       }
     }, {
       key: "getFillType",
