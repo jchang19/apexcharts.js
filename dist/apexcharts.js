@@ -21219,7 +21219,8 @@
             // If user inputs a color in the data, override default colors
             lineFill = fill.fillPath({
               seriesNumber: realIndex,
-              i: i
+              i: i,
+              color: series[i].color
             }); // if (series.color === null) {
             //   lineFill = fill.fillPath({
             //     seriesNumber: realIndex,
