@@ -21041,6 +21041,7 @@
           });
 
           this._handlePaths({
+            series: series,
             type: type,
             realIndex: realIndex,
             i: i,
@@ -21157,7 +21158,8 @@
     }, {
       key: "_handlePaths",
       value: function _handlePaths(_ref2) {
-        var type = _ref2.type,
+        var series = _ref2.series,
+            type = _ref2.type,
             realIndex = _ref2.realIndex,
             i = _ref2.i,
             paths = _ref2.paths;
@@ -21214,13 +21216,13 @@
             //   seriesNumber: realIndex,
             //   i
             // })
-            if (series[i][0] === null) {
+            if (series.color === null) {
               lineFill = fill.fillPath({
                 seriesNumber: realIndex,
                 i: i
               });
             } else {
-              lineFill = series[i][0];
+              lineFill = series.color;
             }
           } else {
             lineFill = w.globals.stroke.colors[realIndex];

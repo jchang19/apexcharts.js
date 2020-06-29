@@ -125,7 +125,7 @@ class Line {
         yArrj
       })
 
-      this._handlePaths({ type, realIndex, i, paths })
+      this._handlePaths({ series, type, realIndex, i, paths })
 
       this.elSeries.add(this.elPointsMain)
       this.elSeries.add(this.elDataLabelsWrap)
@@ -251,7 +251,7 @@ class Line {
     }
   }
 
-  _handlePaths({ type, realIndex, i, paths }) {
+  _handlePaths({ series, type, realIndex, i, paths }) {
     const w = this.w
     const graphics = new Graphics(this.ctx)
     const fill = new Fill(this.ctx)
@@ -309,13 +309,13 @@ class Line {
         //   seriesNumber: realIndex,
         //   i
         // })
-        if (series[i][0] === null) {
+        if (series.color === null) {
           lineFill = fill.fillPath({
             seriesNumber: realIndex,
             i
           })
         } else {
-          lineFill = series[i][0]
+          lineFill = series.color
         }
       } else {
         lineFill = w.globals.stroke.colors[realIndex]
