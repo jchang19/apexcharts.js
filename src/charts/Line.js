@@ -309,13 +309,13 @@ class Line {
         //   seriesNumber: realIndex,
         //   i,
         // })
-        if (series[i].color === null) {
+        if (series[i].color !== undefined) {
+          lineFill = series[i].color
+        } else {
           lineFill = fill.fillPath({
             seriesNumber: realIndex,
             i
           })
-        } else {
-          lineFill = series[i].color
         }
       } else {
         lineFill = w.globals.stroke.colors[realIndex]

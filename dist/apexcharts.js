@@ -21220,13 +21220,13 @@
             //   seriesNumber: realIndex,
             //   i,
             // })
-            if (series[i].color === null) {
+            if (series[i].color !== undefined) {
+              lineFill = series[i].color;
+            } else {
               lineFill = fill.fillPath({
                 seriesNumber: realIndex,
                 i: i
               });
-            } else {
-              lineFill = series[i].color;
             }
           } else {
             lineFill = w.globals.stroke.colors[realIndex];
