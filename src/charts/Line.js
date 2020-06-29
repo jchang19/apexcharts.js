@@ -309,7 +309,6 @@ class Line {
           seriesNumber: realIndex,
           i,
           color: series[i].color
-
         })
         // if (series.color === null) {
         //   lineFill = fill.fillPath({
