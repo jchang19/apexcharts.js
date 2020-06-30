@@ -309,6 +309,7 @@ class Line {
         //   seriesNumber: realIndex,
         //   i,
         // })
+        console.warn(series[i].color)
         if (series[i].color !== undefined) {
           lineFill = series[i].color
         } else {
