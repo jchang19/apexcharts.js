@@ -9294,7 +9294,8 @@
             gl.seriesNames.push(ser[i].name);
           } else {
             gl.seriesNames.push('series-' + parseInt(i + 1, 10));
-          }
+          } // overrided default color if user inputs color with series data
+
 
           if (ser[i].color !== undefined) {
             gl.seriesColors.push(ser[i].color);
@@ -14241,6 +14242,12 @@
 
           if (w.config.legend.markers.fillColors && w.config.legend.markers.fillColors[i]) {
             mStyle.background = w.config.legend.markers.fillColors[i];
+          } // override with data color
+
+
+          if (w.globals.seriesColors[i] !== undefined) {
+            mStyle.background = w.globals.seriesColors[i];
+            mStyle.color = w.globals.seriesColors[i];
           }
 
           mStyle.height = Array.isArray(mHeight) ? parseFloat(mHeight[i]) + 'px' : parseFloat(mHeight) + 'px';
@@ -21056,7 +21063,6 @@
           });
 
           this._handlePaths({
-            series: series,
             type: type,
             realIndex: realIndex,
             i: i,
@@ -21173,8 +21179,7 @@
     }, {
       key: "_handlePaths",
       value: function _handlePaths(_ref2) {
-        var series = _ref2.series,
-            type = _ref2.type,
+        var type = _ref2.type,
             realIndex = _ref2.realIndex,
             i = _ref2.i,
             paths = _ref2.paths;

@@ -465,6 +465,7 @@ export default class Data {
         gl.seriesNames.push('series-' + parseInt(i + 1, 10))
       }
 
+      // overrided default color if user inputs color with series data
       if (ser[i].color !== undefined) {
         gl.seriesColors.push(ser[i].color)
       } else {
