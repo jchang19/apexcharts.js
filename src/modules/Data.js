@@ -464,6 +464,12 @@ export default class Data {
       } else {
         gl.seriesNames.push('series-' + parseInt(i + 1, 10))
       }
+
+      if (ser[i].color !== undefined) {
+        gl.seriesColors.push(ser[i].color)
+      } else {
+        gl.seriesColors.push(undefined)
+      }
     }
 
     return this.w

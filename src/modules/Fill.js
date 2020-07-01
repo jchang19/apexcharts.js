@@ -107,6 +107,11 @@ class Fill {
     let fillColors = this.getFillColors()
     let fillColor = fillColors[this.seriesIndex]
 
+    //override fillcolor if user inputted color with data
+    if (w.globals.seriesColors[this.seriesIndex] !== undefined) {
+      fillColor = w.globals.seriesColors[this.seriesIndex]
+    }
+
     if (typeof fillColor === 'function') {
       fillColor = fillColor({
         seriesIndex: this.seriesIndex,

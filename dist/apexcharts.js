@@ -4378,7 +4378,11 @@
         var patternFill, gradientFill;
         this.seriesIndex = this.getSeriesIndex(opts);
         var fillColors = this.getFillColors();
-        var fillColor = fillColors[this.seriesIndex];
+        var fillColor = fillColors[this.seriesIndex]; //override fillcolor if user inputted color with data
+
+        if (w.globals.seriesColors[this.seriesIndex] !== undefined) {
+          fillColor = w.globals.seriesColors[this.seriesIndex];
+        }
 
         if (typeof fillColor === 'function') {
           fillColor = fillColor({
@@ -8568,6 +8572,7 @@
         gl.seriesNames = [];
         gl.seriesTotals = [];
         gl.seriesLog = [];
+        gl.seriesColors = [];
         gl.stackedSeriesTotals = [];
         gl.seriesXvalues = []; // we will need this in tooltip (it's x position)
         // when we will have unequal x values, we will need
@@ -9289,6 +9294,12 @@
             gl.seriesNames.push(ser[i].name);
           } else {
             gl.seriesNames.push('series-' + parseInt(i + 1, 10));
+          }
+
+          if (ser[i].color !== undefined) {
+            gl.seriesColors.push(ser[i].color);
+          } else {
+            gl.seriesColors.push(undefined);
           }
         }
 
