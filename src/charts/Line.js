@@ -305,19 +305,19 @@ class Line {
       if (type === 'line') {
         // fillable lines only for lineChart
         // If user inputs a color in the data, override default colors
-        // lineFill = fill.fillPath({
-        //   seriesNumber: realIndex,
-        //   i,
-        // })
-        console.warn(series[i].color)
-        if (series[i].color !== undefined) {
-          lineFill = series[i].color
-        } else {
-          lineFill = fill.fillPath({
-            seriesNumber: realIndex,
-            i
-          })
-        }
+        lineFill = fill.fillPath({
+          seriesNumber: realIndex,
+          i
+        })
+        // console.warn(series[i].color)
+        // if (series[i].color !== undefined) {
+        //   lineFill = series[i].color
+        // } else {
+        //   lineFill = fill.fillPath({
+        //     seriesNumber: realIndex,
+        //     i
+        //   })
+        // }
       } else {
         lineFill = w.globals.stroke.colors[realIndex]
       }
