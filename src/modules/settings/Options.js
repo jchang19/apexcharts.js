@@ -367,6 +367,7 @@ export default class Options {
         },
         type: 'line',
         width: '100%',
+        widthExcludeAxes: false,
         zoom: {
           enabled: true,
           type: 'x',

@@ -16,6 +16,8 @@ import Range from './Range'
 import Utils from '../utils/Utils'
 import Scales from './Scales'
 import TimeScale from './TimeScale'
+import Dimensions from './dimensions/Dimensions'
+import DimYAxis from './dimensions/YAxis'
 
 /**
  * ApexCharts Core Class responsible for major calculations and creating elements.
@@ -274,7 +276,12 @@ export default class Core {
     let gl = this.w.globals
     let cnf = this.w.config
 
-    gl.svgWidth = cnf.chart.width
+    let dim = new DimYAxis(this.ctx)
+    if (cnf.chart.widthExcludesAxes) {
+      gl.svgWidth = cnf.chart.width + dim.getTotalYAxisWidth()
+    } else {
+      gl.svgWidth = cnf.chart.width
+    }
     gl.svgHeight = cnf.chart.height
 
     let elDim = Utils.getDimensions(this.el)
