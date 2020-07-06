@@ -277,6 +277,7 @@ export default class Core {
     let cnf = this.w.config
 
     let dim = new DimYAxis(this.ctx)
+    // account for widthExcludesAxes variable
     if (cnf.chart.widthExcludesAxes) {
       gl.svgWidth = cnf.chart.width + dim.getTotalYAxisWidth()
     } else {
