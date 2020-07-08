@@ -22561,14 +22561,15 @@
       value: function setSVGDimensions() {
         var gl = this.w.globals;
         var cnf = this.w.config;
-        var dim = new DimYAxis(this.ctx); // account for widthExcludesAxes variable
+        console.warn(cnf.chart.widthExcludesAxes); // account for widthExcludesAxes variable
 
         if (cnf.chart.widthExcludesAxes) {
-          console.log('true');
-          gl.svgWidth = cnf.chart.width + dim.getTotalYAxisWidth();
+          console.warn('true');
+          gl.svgWidth = cnf.chart.width + this.ctx.getDimensions();
         } else {
           gl.svgWidth = cnf.chart.width;
-        }
+        } // gl.svgWidth = cnf.chart.width
+
 
         gl.svgHeight = cnf.chart.height;
         var elDim = Utils.getDimensions(this.el);
