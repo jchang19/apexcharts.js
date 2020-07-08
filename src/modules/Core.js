@@ -276,13 +276,14 @@ export default class Core {
     let gl = this.w.globals
     let cnf = this.w.config
 
-    let dim = new DimYAxis(this.ctx)
     // account for widthExcludesAxes variable
     if (cnf.chart.widthExcludesAxes) {
-      gl.svgWidth = cnf.chart.width + dim.getTotalYAxisWidth()
+      console.log('true')
+      gl.svgWidth = cnf.chart.width + this.ctx.getDimensions()
     } else {
       gl.svgWidth = cnf.chart.width
     }
+    // gl.svgWidth = cnf.chart.width
     gl.svgHeight = cnf.chart.height
 
     let elDim = Utils.getDimensions(this.el)
@@ -335,8 +336,8 @@ export default class Core {
     let offsetY = cnf.chart.sparkline.enabled
       ? 0
       : gl.axisCharts
-      ? cnf.chart.parentHeightOffset
-      : 0
+        ? cnf.chart.parentHeightOffset
+        : 0
 
     gl.dom.Paper.node.parentNode.parentNode.style.minHeight =
       gl.svgHeight + offsetY + 'px'

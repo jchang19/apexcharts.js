@@ -22564,6 +22564,7 @@
         var dim = new DimYAxis(this.ctx); // account for widthExcludesAxes variable
 
         if (cnf.chart.widthExcludesAxes) {
+          console.log('true');
           gl.svgWidth = cnf.chart.width + dim.getTotalYAxisWidth();
         } else {
           gl.svgWidth = cnf.chart.width;
