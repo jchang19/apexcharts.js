@@ -276,7 +276,7 @@ export default class Core {
     let gl = this.w.globals
     let cnf = this.w.config
 
-    console.warn(cnf.chart.widthExcludesAxes)
+    console.warn('hi')
     // account for widthExcludesAxes variable
     if (cnf.chart.widthExcludesAxes) {
       console.warn('true')

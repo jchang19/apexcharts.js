@@ -22561,7 +22561,7 @@
       value: function setSVGDimensions() {
         var gl = this.w.globals;
         var cnf = this.w.config;
-        console.warn(cnf.chart.widthExcludesAxes); // account for widthExcludesAxes variable
+        console.warn('hi'); // account for widthExcludesAxes variable
 
         if (cnf.chart.widthExcludesAxes) {
           console.warn('true');
