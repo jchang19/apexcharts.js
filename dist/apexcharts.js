@@ -3235,6 +3235,7 @@
             },
             type: 'line',
             width: '100%',
+            widthExcludeAxes: false,
             zoom: {
               enabled: true,
               type: 'x',
@@ -8335,7 +8336,8 @@
 
         var mergedWithDefaultConfig = Utils.extend(newDefaults, window.Apex); // get the merged config and extend with user defined config
 
-        config = Utils.extend(mergedWithDefaultConfig, opts); // some features are not supported. those mismatches should be handled
+        config = Utils.extend(mergedWithDefaultConfig, opts);
+        console.log(config); // some features are not supported. those mismatches should be handled
 
         config = this.handleUserInputErrors(config);
         return config;
@@ -22591,8 +22593,18 @@
       key: "setSVGDimensions",
       value: function setSVGDimensions() {
         var gl = this.w.globals;
-        var cnf = this.w.config;
-        gl.svgWidth = cnf.chart.width;
+        var cnf = this.w.config; // account for widthExcludesAxes variable
+
+        var dim = new Dimensions(this.ctx);
+        dim.plotCoords();
+
+        if (cnf.chart.widthExcludesAxes == true) {
+          gl.svgWidth = cnf.chart.width + dim.yAxisWidth;
+        } else {
+          gl.svgWidth = cnf.chart.width;
+        } // gl.svgWidth = cnf.chart.width
+
+
         gl.svgHeight = cnf.chart.height;
         var elDim = Utils.getDimensions(this.el);
         var widthUnit = cnf.chart.width.toString().split(/[0-9]+/g).pop();
