@@ -22560,12 +22560,13 @@
       key: "setSVGDimensions",
       value: function setSVGDimensions() {
         var gl = this.w.globals;
-        var cnf = this.w.config;
-        console.warn('hi'); // account for widthExcludesAxes variable
+        var cnf = this.w.config; // account for widthExcludesAxes variable
+
+        var dim = new Dimensions(this.ctx);
 
         if (cnf.chart.widthExcludesAxes) {
           console.warn('true');
-          gl.svgWidth = cnf.chart.width + this.ctx.getDimensions();
+          gl.svgWidth = cnf.chart.width + dim.yAxisWidth;
         } else {
           gl.svgWidth = cnf.chart.width;
         } // gl.svgWidth = cnf.chart.width
