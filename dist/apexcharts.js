@@ -22595,10 +22595,12 @@
         var gl = this.w.globals;
         var cnf = this.w.config; // account for widthExcludesAxes variable
         // let dim = new Dimensions(this.ctx)
-        // dim.plotCoords() 
+        // dim.plotCoords()
 
         if (cnf.chart.widthExcludesAxes) {
-          gl.svgWidth = cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
+          // gl.svgWidth =
+          //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+          gl.svgWidth = 1000;
         } else {
           gl.svgWidth = cnf.chart.width;
         } // gl.svgWidth = cnf.chart.width
