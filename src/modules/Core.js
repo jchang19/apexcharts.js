@@ -277,10 +277,11 @@ export default class Core {
     let cnf = this.w.config
 
     // account for widthExcludesAxes variable
-    let dim = new Dimensions(this.ctx)
-    dim.plotCoords()
-    if (cnf.chart.widthExcludesAxes == true) {
-      gl.svgWidth = cnf.chart.width + dim.yAxisWidth
+    // let dim = new Dimensions(this.ctx)
+    // dim.plotCoords()
+    if (cnf.chart.widthExcludesAxes) {
+      gl.svgWidth =
+        cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
     } else {
       gl.svgWidth = cnf.chart.width
     }
