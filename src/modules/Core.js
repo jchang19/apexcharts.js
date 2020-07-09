@@ -279,12 +279,13 @@ export default class Core {
     // account for widthExcludeAxes variable
     // let dim = new Dimensions(this.ctx)
     // dim.plotCoords()
+    let yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
     if (cnf.chart.widthExcludeAxes) {
       // gl.svgWidth =
       //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
       gl.svgWidth = 1000
     } else {
-      gl.svgWidth = cnf.chart.width
+      gl.svgWidth = 200
     }
     // gl.svgWidth = cnf.chart.width
     gl.svgHeight = cnf.chart.height
