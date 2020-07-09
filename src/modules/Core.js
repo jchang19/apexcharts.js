@@ -278,8 +278,8 @@ export default class Core {
 
     // account for widthExcludesAxes variable
     let dim = new Dimensions(this.ctx)
-    if (cnf.chart.widthExcludesAxes) {
-      console.warn('true')
+    dim.plotCoords()
+    if (cnf.chart.widthExcludesAxes == true) {
       gl.svgWidth = cnf.chart.width + dim.yAxisWidth
     } else {
       gl.svgWidth = cnf.chart.width

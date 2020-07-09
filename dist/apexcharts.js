@@ -8328,7 +8328,8 @@
 
         var mergedWithDefaultConfig = Utils.extend(newDefaults, window.Apex); // get the merged config and extend with user defined config
 
-        config = Utils.extend(mergedWithDefaultConfig, opts); // some features are not supported. those mismatches should be handled
+        config = Utils.extend(mergedWithDefaultConfig, opts);
+        console.log(config); // some features are not supported. those mismatches should be handled
 
         config = this.handleUserInputErrors(config);
         return config;
@@ -22563,9 +22564,9 @@
         var cnf = this.w.config; // account for widthExcludesAxes variable
 
         var dim = new Dimensions(this.ctx);
+        dim.plotCoords();
 
-        if (cnf.chart.widthExcludesAxes) {
-          console.warn('true');
+        if (cnf.chart.widthExcludesAxes == true) {
           gl.svgWidth = cnf.chart.width + dim.yAxisWidth;
         } else {
           gl.svgWidth = cnf.chart.width;

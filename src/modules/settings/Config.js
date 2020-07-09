@@ -105,6 +105,7 @@ export default class Config {
 
     // get the merged config and extend with user defined config
     config = Utils.extend(mergedWithDefaultConfig, opts)
+    console.log(config)
 
     // some features are not supported. those mismatches should be handled
     config = this.handleUserInputErrors(config)
