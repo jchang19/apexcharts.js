@@ -22593,11 +22593,11 @@
       key: "setSVGDimensions",
       value: function setSVGDimensions() {
         var gl = this.w.globals;
-        var cnf = this.w.config; // account for widthExcludesAxes variable
+        var cnf = this.w.config; // account for widthExcludeAxes variable
         // let dim = new Dimensions(this.ctx)
         // dim.plotCoords()
 
-        if (cnf.chart.widthExcludesAxes) {
+        if (cnf.chart.widthExcludeAxes) {
           // gl.svgWidth =
           //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
           gl.svgWidth = 1000;
