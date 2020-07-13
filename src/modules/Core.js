@@ -286,7 +286,7 @@ export default class Core {
       gl.svgWidth = 1000
     } else {
       gl.svgWidth = 200
-    }
+    } // jklgjklfdsj
     // gl.svgWidth = cnf.chart.width
     gl.svgHeight = cnf.chart.height
 
