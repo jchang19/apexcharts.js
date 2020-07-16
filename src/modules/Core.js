@@ -276,18 +276,7 @@ export default class Core {
     let gl = this.w.globals
     let cnf = this.w.config
 
-    // account for widthExcludeAxes variable
-    // let dim = new Dimensions(this.ctx)
-    // dim.plotCoords()
-    let yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-    if (cnf.chart.widthExcludeAxes) {
-      // gl.svgWidth =
-      //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-      gl.svgWidth = 1000
-    } else {
-      gl.svgWidth = 200
-    } // jklgjklfdsj
-    // gl.svgWidth = cnf.chart.width
+    gl.svgWidth = cnf.chart.width
     gl.svgHeight = cnf.chart.height
 
     let elDim = Utils.getDimensions(this.el)
@@ -330,6 +319,18 @@ export default class Core {
 
     if (gl.svgWidth < 0) gl.svgWidth = 0
     if (gl.svgHeight < 0) gl.svgHeight = 0
+
+    // account for widthExcludeAxes variable
+    // let dim = new Dimensions(this.ctx)
+    // dim.plotCoords()
+    let yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+    if (cnf.chart.widthExcludeAxes) {
+      // gl.svgWidth =
+      //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+      gl.svgWidth = 1000
+    } else {
+      gl.svgWidth = 200
+    }
 
     Graphics.setAttrs(gl.dom.Paper.node, {
       width: gl.svgWidth,

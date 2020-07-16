@@ -22593,22 +22593,8 @@
       key: "setSVGDimensions",
       value: function setSVGDimensions() {
         var gl = this.w.globals;
-        var cnf = this.w.config; // account for widthExcludeAxes variable
-        // let dim = new Dimensions(this.ctx)
-        // dim.plotCoords()
-
-        var yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
-
-        if (cnf.chart.widthExcludeAxes) {
-          // gl.svgWidth =
-          //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-          gl.svgWidth = 1000;
-        } else {
-          gl.svgWidth = 200;
-        } // jklgjklfdsj
-        // gl.svgWidth = cnf.chart.width
-
-
+        var cnf = this.w.config;
+        gl.svgWidth = cnf.chart.width;
         gl.svgHeight = cnf.chart.height;
         var elDim = Utils.getDimensions(this.el);
         var widthUnit = cnf.chart.width.toString().split(/[0-9]+/g).pop();
@@ -22643,7 +22629,20 @@
         }
 
         if (gl.svgWidth < 0) gl.svgWidth = 0;
-        if (gl.svgHeight < 0) gl.svgHeight = 0;
+        if (gl.svgHeight < 0) gl.svgHeight = 0; // account for widthExcludeAxes variable
+        // let dim = new Dimensions(this.ctx)
+        // dim.plotCoords()
+
+        var yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
+
+        if (cnf.chart.widthExcludeAxes) {
+          // gl.svgWidth =
+          //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+          gl.svgWidth = 1000;
+        } else {
+          gl.svgWidth = 200;
+        }
+
         Graphics.setAttrs(gl.dom.Paper.node, {
           width: gl.svgWidth,
           height: gl.svgHeight
