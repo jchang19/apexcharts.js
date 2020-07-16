@@ -322,8 +322,10 @@ export default class Core {
 
     // account for widthExcludeAxes variable
     // let dim = new Dimensions(this.ctx)
-    // dim.plotCoords()
-    let yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+    // this.ctx.dimensions.plotCoords()
+    let yaxis = new DimYAxis(this.ctx)
+    let yaxiswidth = yaxis.getTotalYAxisWidth()
+    console.log(yaxiswidth)
     if (cnf.chart.widthExcludeAxes) {
       gl.svgWidth += yaxiswidth
       //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()

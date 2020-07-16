@@ -22631,9 +22631,11 @@
         if (gl.svgWidth < 0) gl.svgWidth = 0;
         if (gl.svgHeight < 0) gl.svgHeight = 0; // account for widthExcludeAxes variable
         // let dim = new Dimensions(this.ctx)
-        // dim.plotCoords()
+        // this.ctx.dimensions.plotCoords()
 
-        var yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
+        var yaxis = new DimYAxis(this.ctx);
+        var yaxiswidth = yaxis.getTotalYAxisWidth();
+        console.log(yaxiswidth);
 
         if (cnf.chart.widthExcludeAxes) {
           gl.svgWidth += yaxiswidth; //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
