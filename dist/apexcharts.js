@@ -22636,11 +22636,8 @@
         var yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
 
         if (cnf.chart.widthExcludeAxes) {
-          // gl.svgWidth =
-          //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-          gl.svgWidth = 1000;
-        } else {
-          gl.svgWidth = 200;
+          gl.svgWidth += yaxiswidth; //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+          // gl.svgWidth = 1000
         }
 
         Graphics.setAttrs(gl.dom.Paper.node, {
