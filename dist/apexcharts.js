@@ -22638,12 +22638,13 @@
         console.log(yaxiswidth);
 
         if (cnf.chart.widthExcludeAxes) {
-          gl.svgWidth += yaxiswidth; //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+          gl.svgWidth = 100; //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
           // gl.svgWidth = 1000
         }
 
         Graphics.setAttrs(gl.dom.Paper.node, {
-          width: gl.svgWidth,
+          // width: gl.svgWidth,
+          width: 100,
           height: gl.svgHeight
         }); // gl.dom.Paper.node.parentNode.parentNode.style.minWidth = gl.svgWidth + "px";
 
