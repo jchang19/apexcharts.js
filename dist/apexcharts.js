@@ -22637,7 +22637,7 @@
         // gl.svgWidth = 1000
 
         if (cnf.chart.widthExcludeAxes) {
-          gl.svgWidth = cnf.chart.width + 500;
+          gl.svgWidth = cnf.chart.width;
         }
 
         Graphics.setAttrs(gl.dom.Paper.node, {

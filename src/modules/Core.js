@@ -329,7 +329,7 @@ export default class Core {
     // let yaxiswidth = yaxis.getTotalYAxisWidth()
     // gl.svgWidth = 1000
     if (cnf.chart.widthExcludeAxes) {
-      gl.svgWidth = cnf.chart.width + 500
+      gl.svgWidth = cnf.chart.width
     }
 
     Graphics.setAttrs(gl.dom.Paper.node, {
@@ -341,8 +341,8 @@ export default class Core {
     let offsetY = cnf.chart.sparkline.enabled
       ? 0
       : gl.axisCharts
-      ? cnf.chart.parentHeightOffset
-      : 0
+        ? cnf.chart.parentHeightOffset
+        : 0
 
     gl.dom.Paper.node.parentNode.parentNode.style.minHeight =
       gl.svgHeight + offsetY + 'px'
