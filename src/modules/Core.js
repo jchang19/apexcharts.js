@@ -323,19 +323,17 @@ export default class Core {
     // account for widthExcludeAxes variable
     // let dim = new Dimensions(this.ctx)
     // this.ctx.dimensions.plotCoords()
-    let yaxis = new DimYAxis(this.ctx)
-    let yaxiswidth = yaxis.getTotalYAxisWidth()
-    console.log(yaxiswidth)
-    gl.svgWidth = 1000
+    // let yaxis = new DimYAxis(this)
+    // this.w.config
+
+    // let yaxiswidth = yaxis.getTotalYAxisWidth()
+    // gl.svgWidth = 1000
     if (cnf.chart.widthExcludeAxes) {
-      gl.svgWidth = 100
-      //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-      // gl.svgWidth = 1000
+      gl.svgWidth = cnf.chart.width + 500
     }
 
     Graphics.setAttrs(gl.dom.Paper.node, {
       width: gl.svgWidth,
-      // width: 100,
       height: gl.svgHeight
     })
 

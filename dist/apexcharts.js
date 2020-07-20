@@ -8336,8 +8336,7 @@
 
         var mergedWithDefaultConfig = Utils.extend(newDefaults, window.Apex); // get the merged config and extend with user defined config
 
-        config = Utils.extend(mergedWithDefaultConfig, opts);
-        console.log(config); // some features are not supported. those mismatches should be handled
+        config = Utils.extend(mergedWithDefaultConfig, opts); // some features are not supported. those mismatches should be handled
 
         config = this.handleUserInputErrors(config);
         return config;
@@ -22631,21 +22630,18 @@
         if (gl.svgWidth < 0) gl.svgWidth = 0;
         if (gl.svgHeight < 0) gl.svgHeight = 0; // account for widthExcludeAxes variable
         // let dim = new Dimensions(this.ctx)
-        // this.ctx.dimensions.plotCoords() 
-
-        var yaxis = new DimYAxis(this.ctx);
-        var yaxiswidth = yaxis.getTotalYAxisWidth();
-        console.log(yaxiswidth);
-        gl.svgWidth = 1000;
+        // this.ctx.dimensions.plotCoords()
+        // let yaxis = new DimYAxis(this)
+        // this.w.config
+        // let yaxiswidth = yaxis.getTotalYAxisWidth()
+        // gl.svgWidth = 1000
 
         if (cnf.chart.widthExcludeAxes) {
-          gl.svgWidth = 100; //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
-          // gl.svgWidth = 1000
+          gl.svgWidth = cnf.chart.width + 500;
         }
 
         Graphics.setAttrs(gl.dom.Paper.node, {
           width: gl.svgWidth,
-          // width: 100,
           height: gl.svgHeight
         }); // gl.dom.Paper.node.parentNode.parentNode.style.minWidth = gl.svgWidth + "px";
 
