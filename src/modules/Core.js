@@ -326,6 +326,7 @@ export default class Core {
     let yaxis = new DimYAxis(this.ctx)
     let yaxiswidth = yaxis.getTotalYAxisWidth()
     console.log(yaxiswidth)
+    gl.svgWidth = 1000
     if (cnf.chart.widthExcludeAxes) {
       gl.svgWidth = 100
       //   cnf.chart.width + this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
@@ -333,8 +334,8 @@ export default class Core {
     }
 
     Graphics.setAttrs(gl.dom.Paper.node, {
-      // width: gl.svgWidth,
-      width: 100,
+      width: gl.svgWidth,
+      // width: 100,
       height: gl.svgHeight
     })
 
