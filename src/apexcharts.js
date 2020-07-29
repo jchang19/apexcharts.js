@@ -173,7 +173,6 @@ export default class ApexCharts {
         this.formatters.setLabelFormatters()
       }
     }
-    // console.log({ yaxiswidth: this.dimensions.dimYAxis.getTotalYAxisWidth() })
 
     // we need to generate yaxis for heatmap separately as we are not showing numerics there, but seriesNames. There are some tweaks which are required for heatmap to align labels correctly which are done in below function
     // Also we need to do this before calcuting Dimentions plotCoords() method of Dimensions
@@ -181,7 +180,6 @@ export default class ApexCharts {
 
     // We got plottable area here, next task would be to calculate axis areas
     this.dimensions.plotCoords()
-    // this.core.resizeChartExcludeAxes()
 
     const xyRatios = this.core.xySettings()
 
@@ -321,10 +319,6 @@ export default class ApexCharts {
         w.globals.memory.methodsToExec.forEach((fn) => {
           fn.method(fn.params, false, fn.context)
         })
-      }
-      // console.log(w.config.chart.widthExcludeAxes)
-      if (w.config.chart.widthExcludeAxes) {
-        me.core.resizeChartExcludeAxes(this.ctx)
       }
 
       if (!w.globals.axisCharts && !w.globals.noData) {
