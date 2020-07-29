@@ -3,6 +3,7 @@ import Helpers from './Helpers'
 import DimXAxis from './XAxis'
 import DimYAxis from './YAxis'
 import Grid from './Grid'
+import Graphics from '../Graphics'
 
 /**
  * ApexCharts Dimensions Class for calculating rects of all elements that are drawn and will be drawn.
@@ -95,6 +96,12 @@ export default class Dimensions {
     })
 
     this.yAxisWidth = this.dimYAxis.getTotalYAxisWidth()
+    if (w.config.chart.widthExcludeAxes) {
+      gl.svgWidth += this.yAxisWidth
+      Graphics.setAttrs(gl.dom.Paper.node, {
+        width: gl.svgWidth
+      })
+    }
 
     let xaxisLabelCoords = this.dimXAxis.getxAxisLabelsCoords()
     let xtitleCoords = this.dimXAxis.getxAxisTitleCoords()
@@ -104,8 +111,8 @@ export default class Dimensions {
     gl.translateXAxisY = w.globals.rotateXLabels ? this.xAxisHeight / 8 : -4
     gl.translateXAxisX =
       w.globals.rotateXLabels &&
-      w.globals.isXNumeric &&
-      w.config.xaxis.labels.rotate <= -45
+        w.globals.isXNumeric &&
+        w.config.xaxis.labels.rotate <= -45
         ? -this.xAxisWidth / 4
         : 0
 
@@ -199,8 +206,8 @@ export default class Dimensions {
 
     const type =
       cnf.chart.type === 'pie' ||
-      cnf.chart.type === 'polarArea' ||
-      cnf.chart.type === 'donut'
+        cnf.chart.type === 'polarArea' ||
+        cnf.chart.type === 'donut'
         ? 'pie'
         : 'radialBar'
 
@@ -254,7 +261,7 @@ export default class Dimensions {
     const w = this.w
     this.xAxisHeight =
       (xaxisLabelCoords.height + xtitleCoords.height) *
-        (w.globals.isMultiLineX ? 1.2 : w.globals.LINE_HEIGHT_RATIO) +
+      (w.globals.isMultiLineX ? 1.2 : w.globals.LINE_HEIGHT_RATIO) +
       (w.globals.rotateXLabels ? 22 : 10)
 
     this.xAxisWidth = xaxisLabelCoords.width

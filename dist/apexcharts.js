@@ -22629,17 +22629,37 @@
 
         if (gl.svgWidth < 0) gl.svgWidth = 0;
         if (gl.svgHeight < 0) gl.svgHeight = 0; // account for widthExcludeAxes variable
-        // let dim = new Dimensions(this.ctx)
-        // this.ctx.dimensions.plotCoords()
-        // let yaxis = new DimYAxis(this)
-        // this.w.config
-        // let yaxiswidth = yaxis.getTotalYAxisWidth()
-        // gl.svgWidth = 1000
+        // let yAxisWidth = 0
+        // let padding = gl.yAxisScale.length > 1 ? 10 : 0
+        // const axesUtils = new AxesUtils(this.ctx)
+        // if (cnf.chart.widthExcludeAxes) {
+        //   const isHiddenYAxis = function(index) {
+        //     return gl.ignoreYAxisIndexes.indexOf(index) > -1
+        //   }
+        //   const padForLabelTitle = (coord, index) => {
+        //     let floating = cnf.yaxis[index].floating
+        //     let width = 0
+        //     if (coord.width > 0 && !floating) {
+        //       width = coord.width + padding
+        //       if (isHiddenYAxis(index)) {
+        //         width = width - coord.width - padding
+        //       }
+        //     } else {
+        //       width = floating || axesUtils.isYAxisHidden(index) ? 0 : 5
+        //     }
+        //     yAxisWidth = yAxisWidth + width
+        //   }
+        //   gl.yLabelsCoords.map((yLabelCoord, index) => {
+        //     padForLabelTitle(yLabelCoord, index)
+        //   })
+        //   gl.yTitleCoords.map((yTitleCoord, index) => {
+        //     padForLabelTitle(yTitleCoord, index)
+        //   })
+        //   gl.svgWidth = yAxisWidth + gl.svgWidth
+        //   //   gl.svgWidth = cnf.chart.width
+        // }
 
-        if (cnf.chart.widthExcludeAxes) {
-          gl.svgWidth = cnf.chart.width;
-        }
-
+        var dim = new Dimensions(this.ctx);
         Graphics.setAttrs(gl.dom.Paper.node, {
           width: gl.svgWidth,
           height: gl.svgHeight
@@ -22660,6 +22680,22 @@
           transform: 'translate(' + tX + ', ' + tY + ')'
         };
         Graphics.setAttrs(gl.dom.elGraphical.node, scalingAttrs);
+      } // account for boolean widthExcludeAxes
+
+    }, {
+      key: "resizeChartExcludingAxes",
+      value: function resizeChartExcludingAxes() {
+        var w = this.w;
+        var cnf = w.config;
+        var gl = w.globals;
+
+        if (cnf.chart.widthExcludeAxes) {
+          gl.svgWidth += this.ctx.dimensions.dimYAxis.getTotalYAxisWidth();
+        }
+
+        Graphics.setAttrs(gl.dom.Paper.node, {
+          width: gl.svgWidth
+        });
       } // To prevent extra spacings in the bottom of the chart, we need to recalculate the height for pie/donut/radialbar charts
 
     }, {
@@ -29110,6 +29146,7 @@
       key: "create",
       value: function create(ser, opts) {
         var w = this.w;
+        console.log('creating chart');
         var initCtx = new InitCtxVariables(this);
         initCtx.initModules();
         var gl = this.w.globals;
@@ -29303,6 +29340,8 @@
               fn.method(fn.params, false, fn.context);
             });
           }
+
+          me.core.resizeChartsExcludingAxes();
 
           if (!w.globals.axisCharts && !w.globals.noData) {
             me.core.resizeNonAxisCharts();

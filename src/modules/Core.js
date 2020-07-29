@@ -16,8 +16,8 @@ import Range from './Range'
 import Utils from '../utils/Utils'
 import Scales from './Scales'
 import TimeScale from './TimeScale'
+// import AxesUtils from './axes/AxesUtils'
 import Dimensions from './dimensions/Dimensions'
-import DimYAxis from './dimensions/YAxis'
 
 /**
  * ApexCharts Core Class responsible for major calculations and creating elements.
@@ -321,16 +321,51 @@ export default class Core {
     if (gl.svgHeight < 0) gl.svgHeight = 0
 
     // account for widthExcludeAxes variable
-    // let dim = new Dimensions(this.ctx)
-    // this.ctx.dimensions.plotCoords()
-    // let yaxis = new DimYAxis(this)
-    // this.w.config
+    // let yAxisWidth = 0
+    // let padding = gl.yAxisScale.length > 1 ? 10 : 0
+    // const axesUtils = new AxesUtils(this.ctx)
+    // if (cnf.chart.widthExcludeAxes) {
+    //   const isHiddenYAxis = function(index) {
+    //     return gl.ignoreYAxisIndexes.indexOf(index) > -1
+    //   }
+    //   const padForLabelTitle = (coord, index) => {
+    //     let floating = cnf.yaxis[index].floating
+    //     let width = 0
 
-    // let yaxiswidth = yaxis.getTotalYAxisWidth()
-    // gl.svgWidth = 1000
-    if (cnf.chart.widthExcludeAxes) {
-      gl.svgWidth = cnf.chart.width
-    }
+    //     if (coord.width > 0 && !floating) {
+    //       width = coord.width + padding
+    //       if (isHiddenYAxis(index)) {
+    //         width = width - coord.width - padding
+    //       }
+    //     } else {
+    //       width = floating || axesUtils.isYAxisHidden(index) ? 0 : 5
+    //     }
+
+    //     yAxisWidth = yAxisWidth + width
+    //   }
+    //   gl.yLabelsCoords.map((yLabelCoord, index) => {
+    //     padForLabelTitle(yLabelCoord, index)
+    //   })
+
+    //   gl.yTitleCoords.map((yTitleCoord, index) => {
+    //     padForLabelTitle(yTitleCoord, index)
+    //   })
+    //   gl.svgWidth = yAxisWidth + gl.svgWidth
+    //   //   gl.svgWidth = cnf.chart.width
+    // }
+    // let dim = new Dimensions(this.ctx)
+    // let yaxiswidth = this.ctx.dimensions.dimYAxis.getTotalYAxisWidth()
+    // // console.log(dim)
+    // // console.log(this.ctx.dimensions)
+    // console.log(cnf.chart.widthExcludeAxes)
+    // console.log(this.ctx.dimensions)
+    // console.log(this.ctx.dimensions.yAxisWidth)
+    // debugger
+
+    // if (cnf.chart.widthExcludeAxes) {
+    //   gl.svgWidth += this.ctx.dimensions.yAxisWidth
+    // }
+    // console.log(this.ctx.dimensions.dimYAxis.getTotalYAxisWidth())
 
     Graphics.setAttrs(gl.dom.Paper.node, {
       width: gl.svgWidth,
@@ -341,8 +376,8 @@ export default class Core {
     let offsetY = cnf.chart.sparkline.enabled
       ? 0
       : gl.axisCharts
-      ? cnf.chart.parentHeightOffset
-      : 0
+        ? cnf.chart.parentHeightOffset
+        : 0
 
     gl.dom.Paper.node.parentNode.parentNode.style.minHeight =
       gl.svgHeight + offsetY + 'px'
@@ -361,6 +396,19 @@ export default class Core {
       transform: 'translate(' + tX + ', ' + tY + ')'
     }
     Graphics.setAttrs(gl.dom.elGraphical.node, scalingAttrs)
+  }
+
+  // account for boolean widthExcludeAxes
+  resizeChartExcludeAxes() {
+    const w = this.w
+    const gl = w.globals
+
+    // console.log(ctx.dimensions.yAxisWidth)
+    gl.svgWidth += this.ctx.dimensions.yAxisWidth
+
+    Graphics.setAttrs(gl.dom.Paper.node, {
+      width: gl.svgWidth
+    })
   }
 
   // To prevent extra spacings in the bottom of the chart, we need to recalculate the height for pie/donut/radialbar charts
