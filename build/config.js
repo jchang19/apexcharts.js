@@ -87,11 +87,11 @@ function rollupConfig(opts) {
 
   if (opts.env === 'production') {
     config.plugins.push(
-      strip({
-        debugger: true,
-        functions: ['console.log', 'debug', 'alert'],
-        sourceMap: false
-      }),
+      // strip({
+      //   debugger: true,
+      //   functions: ['console.log', 'debug', 'alert'],
+      //   sourceMap: false
+      // }),
       terser({
         output: {
           ascii_only: true
