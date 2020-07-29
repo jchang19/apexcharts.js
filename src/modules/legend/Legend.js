@@ -146,6 +146,12 @@ class Legend {
         mStyle.color = w.globals.seriesColors[i]
       }
 
+      // override with data color
+      if (w.globals.seriesColors[i] !== undefined) {
+        mStyle.background = w.globals.seriesColors[i]
+        mStyle.color = w.globals.seriesColors[i]
+      }
+
       mStyle.height = Array.isArray(mHeight)
         ? parseFloat(mHeight[i]) + 'px'
         : parseFloat(mHeight) + 'px'

@@ -234,7 +234,6 @@ export default class ApexCharts {
       let elgrid = me.grid.drawGrid()
 
       me.annotations = new Annotations(me)
-      me.annotations.drawShapeAnnos()
       me.annotations.drawImageAnnos()
       me.annotations.drawTextAnnos()
 
@@ -254,7 +253,7 @@ export default class ApexCharts {
         me.annotations.drawAxesAnnotations()
       }
 
-      if (graphData.elGraph instanceof Array) {
+      if (Array.isArray(graphData.elGraph)) {
         for (let g = 0; g < graphData.elGraph.length; g++) {
           w.globals.dom.elGraphical.add(graphData.elGraph[g])
         }
@@ -467,12 +466,11 @@ export default class ApexCharts {
     }
     me.w.config.series = newSeries
     if (overwriteInitialSeries) {
-      me.w.globals.initialSeries = JSON.parse(
-        JSON.stringify(me.w.config.series)
-      )
+      me.w.globals.initialSeries = Utils.clone(me.w.config.series)
     }
 
-    return this.update()
+    // call update with existing series to set the series forcefully avoiding reset on resize
+    return this.update({ series: this.w.config.series })
   }
 
   update(options) {
@@ -713,7 +711,8 @@ export default class ApexCharts {
       this.w.globals.dataChanged = false
 
       // we need to redraw the whole chart on window resize (with a small delay).
-      this.ctx.update()
+      // call update with existing series to set the series forcefully avoiding reset on resize
+      this.ctx.update({ series: this.w.config.series })
     }, 150)
   }
 }

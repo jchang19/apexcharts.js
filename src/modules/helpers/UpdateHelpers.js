@@ -64,12 +64,12 @@ export default class UpdateHelpers {
 
         if (overwriteInitialConfig) {
           // we need to forget the lastXAxis and lastYAxis is user forcefully overwriteInitialConfig. If we do not do this, and next time when user zooms the chart after setting yaxis.min/max or xaxis.min/max - the stored lastXAxis will never allow the chart to use the updated min/max by user.
-          w.globals.lastXAxis = []
-          w.globals.lastYAxis = []
+          w.globals.lastXAxis = options.xaxis ? Utils.clone(options.xaxis) : []
+          w.globals.lastYAxis = options.yaxis ? Utils.clone(options.yaxis) : []
 
           // After forgetting lastAxes, we need to restore the new config in initialConfig/initialSeries
           w.globals.initialConfig = Utils.extend({}, w.config)
-          w.globals.initialSeries = JSON.parse(JSON.stringify(w.config.series))
+          w.globals.initialSeries = Utils.clone(w.config.series)
         }
       }
 
@@ -111,22 +111,23 @@ export default class UpdateHelpers {
     }
 
     if (overwriteInitialSeries) {
-      w.globals.initialConfig.series = JSON.parse(
-        JSON.stringify(w.config.series)
-      )
-      w.globals.initialSeries = JSON.parse(JSON.stringify(w.config.series))
+      w.globals.initialSeries = Utils.clone(w.config.series)
     }
-
-    return this.ctx.update()
+    return this.ctx.update({
+      series: newSeries
+    })
   }
 
   _extendSeries(s, i) {
     const w = this.w
+    const ser = w.config.series[i]
+
     return {
       ...w.config.series[i],
-      name: s.name ? s.name : w.config.series[i] && w.config.series[i].name,
-      type: s.type ? s.type : w.config.series[i] && w.config.series[i].type,
-      data: s.data ? s.data : w.config.series[i] && w.config.series[i].data
+      name: s.name ? s.name : ser && ser.name,
+      color: s.color ? s.color : ser && ser.color,
+      type: s.type ? s.type : ser && ser.type,
+      data: s.data ? s.data : ser && ser.data
     }
   }
 
@@ -170,6 +171,7 @@ export default class UpdateHelpers {
   forceXAxisUpdate(options) {
     const w = this.w
     const minmax = ['min', 'max']
+
     minmax.forEach((a) => {
       if (typeof options.xaxis[a] !== 'undefined') {
         w.config.xaxis[a] = options.xaxis[a]
@@ -215,19 +217,27 @@ export default class UpdateHelpers {
     w.config.xaxis.min = w.globals.lastXAxis.min
     w.config.xaxis.max = w.globals.lastXAxis.max
 
+    const getLastYAxis = (index) => {
+      if (typeof w.globals.lastYAxis[index] !== 'undefined') {
+        w.config.yaxis[index].min = w.globals.lastYAxis[index].min
+        w.config.yaxis[index].max = w.globals.lastYAxis[index].max
+      }
+    }
+
     w.config.yaxis.map((yaxe, index) => {
       if (w.globals.zoomed) {
         // user has zoomed, check the last yaxis
-
-        if (typeof w.globals.lastYAxis[index] !== 'undefined') {
-          yaxe.min = w.globals.lastYAxis[index].min
-          yaxe.max = w.globals.lastYAxis[index].max
-        }
+        getLastYAxis(index)
       } else {
-        // user hasn't zoomed, check the original yaxis
-        if (typeof this.ctx.opts.yaxis[index] !== 'undefined') {
-          yaxe.min = this.ctx.opts.yaxis[index].min
-          yaxe.max = this.ctx.opts.yaxis[index].max
+        // user hasn't zoomed, check the last yaxis first
+        if (typeof w.globals.lastYAxis[index] !== 'undefined') {
+          getLastYAxis(index)
+        } else {
+          // if last y-axis don't exist, check the original yaxis
+          if (typeof this.ctx.opts.yaxis[index] !== 'undefined') {
+            yaxe.min = this.ctx.opts.yaxis[index].min
+            yaxe.max = this.ctx.opts.yaxis[index].max
+          }
         }
       }
     })

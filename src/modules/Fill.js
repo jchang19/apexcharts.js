@@ -219,13 +219,13 @@ class Fill {
 
     if (w.globals.comboCharts) {
       if (w.config.series[this.seriesIndex].type === 'line') {
-        if (w.globals.stroke.colors instanceof Array) {
+        if (Array.isArray(w.globals.stroke.colors)) {
           fillColors = w.globals.stroke.colors
         } else {
           fillColors.push(w.globals.stroke.colors)
         }
       } else {
-        if (w.globals.fill.colors instanceof Array) {
+        if (Array.isArray(w.globals.fill.colors)) {
           fillColors = w.globals.fill.colors
         } else {
           fillColors.push(w.globals.fill.colors)
@@ -233,13 +233,13 @@ class Fill {
       }
     } else {
       if (cnf.chart.type === 'line') {
-        if (w.globals.stroke.colors instanceof Array) {
+        if (Array.isArray(w.globals.stroke.colors)) {
           fillColors = w.globals.stroke.colors
         } else {
           fillColors.push(w.globals.stroke.colors)
         }
       } else {
-        if (w.globals.fill.colors instanceof Array) {
+        if (Array.isArray(w.globals.fill.colors)) {
           fillColors = w.globals.fill.colors
         } else {
           fillColors.push(w.globals.fill.colors)
@@ -250,7 +250,7 @@ class Fill {
     // colors passed in arguments
     if (typeof opts.fillColors !== 'undefined') {
       fillColors = []
-      if (opts.fillColors instanceof Array) {
+      if (Array.isArray(opts.fillColors)) {
         fillColors = opts.fillColors.slice()
       } else {
         fillColors.push(opts.fillColors)
@@ -275,7 +275,7 @@ class Fill {
         : cnf.fill.pattern.strokeWidth
     let patternLineColor = fillColor
 
-    if (cnf.fill.pattern.style instanceof Array) {
+    if (Array.isArray(cnf.fill.pattern.style)) {
       if (typeof cnf.fill.pattern.style[opts.seriesNumber] !== 'undefined') {
         let pf = graphics.drawPattern(
           cnf.fill.pattern.style[opts.seriesNumber],
