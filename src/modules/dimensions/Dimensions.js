@@ -96,6 +96,8 @@ export default class Dimensions {
     })
 
     this.yAxisWidth = this.dimYAxis.getTotalYAxisWidth()
+
+    // account for widthExcludeAxes prop
     if (w.config.chart.widthExcludeAxes) {
       gl.svgWidth += this.yAxisWidth
       Graphics.setAttrs(gl.dom.Paper.node, {
